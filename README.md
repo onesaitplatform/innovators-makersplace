@@ -1,5 +1,5 @@
 # innovators-makersplace
-Market Place IoT para Makers 3D contra el Covid-19
+Market Place IoT para Makers 3D contra el Covid-19 
 
 Espacio público en el que compartir diseños 3D que puedan ayudar a la construcción de materiales para la lucha contra el covid e interactuar entre ellos a futuro. Dirigido a:
 
