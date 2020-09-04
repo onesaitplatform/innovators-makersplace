@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Market Place IoT</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<!--===============================================================================================	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">-->
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<!--===============================================================================================-->
+
+<style>
+		.card {
+			cursor: pointer
+		}
+		
+	</style>
+</head>
+
+<body>
+
+	<div class="limiter">
+		
+	
+		<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top" style="height: 80px; background-color: #cffcc7 !important;">
+			<a class="navbar-brand" href="main.html">MARKET PLACE IOT MAKERS 3D</a>
+			
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse pull-right" id="navbarNavDropdown">
+				<ul class="navbar-nav ">
+					<li class="nav-item">
+						<a class="nav-link" href="create.html"><span class="lnr lnr-plus-circle"></span> Crear</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							<span class="lnr lnr-user"></span> rtvachet
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+							<a class="dropdown-item disabled" href="#">Información personal</a>
+							<a class="dropdown-item" href="index.html">Cerrar sesión</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div id="spinnermain" class="spinner-grow text-dark" style="display:none;height: 20px; width:  20px;" role="status"> 
+				<span class="sr-only">Loading</span> 
+			</div> 
+		</nav>
+
+		<div class="container-fluid">	
+		
+			<div id="market-elements" class="row">
+				<!--<div class="col-3">
+					<div class="card" onclick="func(100)">
+						<img class="card-img-top" src="images/bg-01.jpg">
+						<div class="card-body">
+							<h5 class="card-title">Card title</h5>
+							<div class="row">
+								<div class="col-8">
+									<p class="card-text">Some quick example text to build on the card title and make up
+										the bulk of the card's content.</p>
+								</div>
+								<div class="col-4">
+									<div class="row">
+										<span class="lnr lnr-thumbs-up"></span>
+										<span style="    margin-left: 10px;" class="card-text">200</span>
+									</div>
+									<div class="row">
+										<span class="lnr lnr-bubble"></span>
+										<span style="    margin-left: 10px;" class="card-text">15</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>-->
+
+
+			</div>
+		</div>
+	</div>
+
+	<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+	<script>
+		function func(id) {
+			document.location.href = "element.html?id=" + id;
+		}
+
+
+		function init(){
+			$('#spinnermain').show();
+			var settings = {
+				"url": "https://lab.onesaitplatform.com/api-manager/server/api/v1/Market3D_asset/get/?limit=1000&skip=0",
+				"method": "GET",
+				"timeout": 0,
+				"headers": {
+					"X-OP-APIKey": "b2fd5ceda7154eecb401886f461a6f0a"
+				},
+				"processData": false,
+				"mimeType": "multipart/form-data",
+				"contentType": false
+			};
+
+			$.ajax(settings).fail(function () {
+				$('#spinnermain').hide();
+			}).done(function (response) {
+			var data = JSON.parse(response);			 			
+				draw(data);
+			});
+		}
+function draw(data){
+	data.forEach(element => {
+	if(element.description.length>150){
+		element.description=element.description.substring(0,150)+'...';
+	}	
+	if(typeof element.rating =='undefined' ||element.rating==null ){
+		element.rating=0;
+	}
+	if(typeof element.numComments =='undefined' ||element.numComments==null ){
+		element.numComments=0;
+	}
+	var elemhtml= `	<div class="col-3">
+		       		<div class="card" style="    min-height: 305px;    margin-left: 10px;    margin-top: 10px;    margin-right: 10px;    margin-bottom: 10px;" onclick="func('${element.id}')">
+						<img class="card-img-top" src="images/bg-01.jpg">
+						<div class="card-body">
+							<h5 class="card-title">${element.name}</h5>
+							<div class="row">
+								<div class="col-10">
+									<p class="card-text">${element.description}</p>
+								</div>
+								<div class="col-2">
+									<div class="row">
+										<span class="lnr lnr-thumbs-up"></span>
+										<span style="    margin-left: 10px;" class="card-text">${parseFloat(element.rating).toFixed(2)}</span>
+									</div>
+									<div class="row">
+										<span class="lnr lnr-bubble"></span>
+										<span style="    margin-left: 10px;" class="card-text">${parseFloat(element.numComments).toFixed(0)}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+				   	</div>
+					</div> `;
+					$('#market-elements').append(elemhtml);
+
+
+
+	});
+	$('#spinnermain').hide();
+	}
+		window.onload = function() {
+  			init();  			
+		};	
+	</script>
+</body>
+
+</html>
