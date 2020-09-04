@@ -8,3 +8,31 @@ Espacio público en el que compartir diseños 3D que puedan ayudar a la construc
 - Vigilancia (piezas de drones, soporte para cámaras, etc..)
 
 - Social (juguetes, artículos para escuelas, prótesis, etc..)
+
+
+¿Qué podemos hacer con el market que hemos creado para el concurso?
+-Nos autenticamos como usuario registrado.
+-Podemos acceder al catálogo de diseños subidos y sus valoraciones por los usuarios de la web.
+-Podemos ver en detalle estos diseños, en esta pantalla se pueden valorar y descargar.
+-Tenemos la opción de compartir nuestras propias creaciones, asignandoles un nombre, una descripción corta, un resumen, subir una imagen y un fichero con la información del diseño.
+
+
+
+
+Pasos seguidos para el desarrollo del proyecto:
+
+En el entorono Lab se han creado dos Ontologías:
+1.	Marketplace3DAsset: Contiene los modelos 3D y su información
+![alt text](http://url/to/img.png)
+
+2.	Marketplace3DComments: Contiene una entrada por cada valoración y comentario
+![alt text](http://url/to/img.png)
+
+Se ha creado un proyecto web:
+market3d: la plataforma aloja de manera gratuita el proyecto web en el entorno cloudlab, por lo que es facil desarrollar y poder hacer un prototipo, como el que hemos subido.
+![alt text](http://url/to/img.png)
+
+Para la comunicación entre el proyecto web y las ontologías se han creado dos apis, apartir de la herramienta de la plataforma FlowEngine, pudiendo crear de manera sencilla flujos de entrada, tratamiento y salida de la información sin necesidad de crear un backend fuera de la onesait plataform
+![alt text](http://url/to/img.png)
+![alt text](http://url/to/img.png)
+
