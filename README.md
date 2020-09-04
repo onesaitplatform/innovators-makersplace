@@ -23,16 +23,16 @@ Pasos seguidos para el desarrollo del proyecto:
 
 En el entorono Lab se han creado dos Ontologías:
 1.	Marketplace3DAsset: Contiene los modelos 3D y su información
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/onesaitplatform/innovators-makersplace/blob/master/recursos/dom1.png)
 
 2.	Marketplace3DComments: Contiene una entrada por cada valoración y comentario
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/onesaitplatform/innovators-makersplace/blob/master/recursos/dom2.png)
 
 Se ha creado un proyecto web:
 market3d: la plataforma aloja de manera gratuita el proyecto web en el entorno cloudlab, por lo que es facil desarrollar y poder hacer un prototipo, como el que hemos subido.
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/onesaitplatform/innovators-makersplace/blob/master/recursos/login.png)
 
 Para la comunicación entre el proyecto web y las ontologías se han creado dos apis, apartir de la herramienta de la plataforma FlowEngine, pudiendo crear de manera sencilla flujos de entrada, tratamiento y salida de la información sin necesidad de crear un backend fuera de la onesait plataform
-![alt text](http://url/to/img.png)
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/onesaitplatform/innovators-makersplace/blob/master/recursos/flownengine2.png)
+![alt text](https://github.com/onesaitplatform/innovators-makersplace/blob/master/recursos/flownengine3.png)
 
