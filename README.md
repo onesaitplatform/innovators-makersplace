@@ -11,10 +11,10 @@ Espacio público en el que compartir diseños 3D que puedan ayudar a la construc
 
 
 ¿Qué podemos hacer con el market que hemos creado para el concurso?
--Nos autenticamos como usuario registrado.
--Podemos acceder al catálogo de diseños subidos y sus valoraciones por los usuarios de la web.
--Podemos ver en detalle estos diseños, en esta pantalla se pueden valorar y descargar.
--Tenemos la opción de compartir nuestras propias creaciones, asignandoles un nombre, una descripción corta, un resumen, subir una imagen y un fichero con la información del diseño.
+- Nos autenticamos como usuario registrado.
+- Podemos acceder al catálogo de diseños subidos y sus valoraciones por los usuarios de la web.
+- Podemos ver en detalle estos diseños, en esta pantalla se pueden valorar y descargar.
+- Tenemos la opción de compartir nuestras propias creaciones, asignandoles un nombre, una descripción corta, un resumen, subir una imagen y un fichero con la información del diseño.
 
 
 
