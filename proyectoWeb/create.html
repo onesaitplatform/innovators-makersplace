@@ -28,12 +28,17 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!--===============================================================================================-->
 
+ <style>
+ body{
+	padding-top: 100px;
+}
+</style>
 </head>
 
 <body>
 
 	<div class="limiter">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top" style="height: 80px; background-color: #cffcc7 !important;">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="height: 80px; background-color: #cffcc7 !important;">
 			<a class="navbar-brand" href="main.html">MARKET PLACE IOT MAKERS 3D</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
 				aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,15 +115,15 @@
 											<label id="labelimage" class="custom-file-label" for="customFile">Selecciona una imagen</label>
 										</div>
 
-										<label>Plano</label>
+										<label>Modelo 3D</label>
 										<div id="alertplano" class="alert alert-danger " style="display:none;"
 											role="alert">
-											Es necesario plano
+											Es necesario modelo 3D
 										</div>
 										<div class="custom-file">
 											<input type="file" class="custom-file-input" id="asset" name="filename">
 											<label id="labelfichero" class="custom-file-label"
-												for="customFile">Selecciona el fichero con el plano</label>
+												for="customFile">Selecciona el fichero con el modelo 3D</label>
 										</div>
 
 
@@ -145,7 +150,7 @@
 	<!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
@@ -204,7 +209,7 @@
 				$('#alertimagen').show();
 				check = false;
 			}
-			if (fich.trim().length == 0 || fich == "Selecciona el fichero con el plano") {
+			if (fich.trim().length == 0 || fich == "Selecciona el fichero con el modelo 3D") {
 				$('#alertplano').show();
 				check = false;
 			}
@@ -225,6 +230,12 @@
 			form.append("asset", $('#asset')[0].files[0], $("#labelfichero").text());
 			form.append("image1", $('#image1')[0].files[0], $("#labelimage").text());
 			form.append("user", "rtvachet");
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			var parent = urlParams.get('parent');
+			if(typeof parent!=='undefined' && parent!=null ){
+				form.append("parent", parent);
+			}
 			var settings = {
 				"url": "https://lab.onesaitplatform.com/api-manager/server/api/v1/Market3D_asset/insert/",
 				"method": "POST",

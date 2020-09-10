@@ -30,6 +30,11 @@
 
 
 	<style>
+	 
+		body{
+			padding-top: 100px;
+		}
+ 
 		* {
 			box-sizing: border-box;
 		}
@@ -193,7 +198,7 @@
 <body>
 
 	<div class="limiter">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top" style="height: 80px; background-color: #cffcc7 !important;">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="height: 80px; background-color: #cffcc7 !important;">
 			<a class="navbar-brand" href="main.html">MARKET PLACE IOT MAKERS 3D</a>
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -227,6 +232,7 @@
 		<div class="container-fluid">
 			<div id="market-elements" class="row" style="margin-top: 50px;">
 			</div>
+			
 			<div id="valorar" class="row" style="margin-top: 50px;">
 				<div class="col-12">
 					<div id="creacionCorrecta" style="display:none" class="alert alert-success"
@@ -283,6 +289,13 @@
 					</div>
 				</div>
 			</div>
+			<div  class="row" style="margin-top: 50px;">
+				<div class="col-12">
+				<h3>MODELOS 3D CREADOS APARTIR DE ESTE MODELO</h3>
+				</div>
+			</div>
+			<div id="divchildrens" class="row" style="margin-top: 50px;">
+			</div>
 		</div>
 	</div>
 
@@ -291,7 +304,7 @@
 	<!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
+
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
@@ -312,6 +325,7 @@
 			const queryString = window.location.search;
 			const urlParams = new URLSearchParams(queryString);
 			id = urlParams.get('id');
+			
 			var settings = {
 				"url": "https://lab.onesaitplatform.com/api-manager/server/api/v1/Market3D_asset/get/" + id,
 				"method": "GET",
@@ -324,10 +338,11 @@
 				"contentType": false
 			};
 
-			$.ajax(settings).fail(function () {
-
+			$.ajax(settings).fail(function (response) {
+				
 				$('#spinnermain').hide();
 			}).done(function (response) {
+				
 				var data = JSON.parse(response);
 				console.log(response);
 
@@ -346,13 +361,18 @@
 						<div class="card-body">
 							<h5 class="card-title">${element.name}</h5>
 							<div class="row">
-								<div class="col-10">
+								<div class="col-9">
 									<p class="card-text">${element.description}</p>
 								</div>
-								<div class="col-2">
+								<div class="col-3">
 									<div class="container-login100-form-btn">
-										<a  class="login100-form-btn" href="${element.file}" download="proposed_file_name">Download</a>
+										<a  class="login100-form-btn" href="${element.file}" download="proposed_file_name">Descargar</a>
+									</div>
+										<div class="container-login100-form-btn">
+										<a  class="login100-form-btn"  style="margin-top:20px;" href="create.html?parent=${element.id}"  >Crear Modelo 3D Modificando este</a>
 								</div>
+							
+								
 							</div>
 							</div>
 							<hr/>
@@ -370,9 +390,9 @@
 			$('#market-elements').append(elemhtml);
 
 
+			var puntuaciones=[0,0,0,0,0,0];
 			if (typeof element.ratings != 'undefined' && element.ratings != null && element.ratings.length > 0) {
 				$('#ratings').append('<h5 style="margin-left: 14px;">Valoraciones</h5></br>');
-				var puntuaciones=[0,0,0,0,0,0];
 				element.ratings.forEach(rating => {
 					var ratinghtml = `  
 			<div class="col-12">
@@ -394,6 +414,7 @@
 			if(element.ratings.length>0){
 				calc = 100 /element.ratings.length ;
 			}
+			
 			var val = `<div class="col-md-6 offset-md-3" id="valoraciones">	
 				</br></br>
 				<div class="row">
@@ -472,6 +493,7 @@
 		}
 		window.onload = function () {
 			init();
+			mostrarChildrens();
 		};
 		var radioValoracion = 0;
 		$(':radio').change(function () {
@@ -527,6 +549,76 @@
 
 	})
 	}
+
+	function mostrarChildrens(){		
+		$('#spinnermain').show();
+		var settings = {
+				"url": "https://lab.onesaitplatform.com/api-manager/server/api/v1/Market3D_asset/getChildren/?limit=1000&skip=0&parent="+id,
+				"method": "GET",
+				"timeout": 0,
+				"headers": {
+					"X-OP-APIKey": "b2fd5ceda7154eecb401886f461a6f0a"
+				},
+				"processData": false,
+				"mimeType": "multipart/form-data",
+				"contentType": false
+			};
+
+			$.ajax(settings).fail(function () {
+				$('#spinnermain').hide();
+			}).done(function (response) {
+			var data = JSON.parse(response);
+			    $('#divchildrens').empty();			 			
+				drawChildrens(data);
+			});
+	}
+
+	function drawChildrens(data){	
+	
+	data.forEach(element => {
+	if(element.description.length>150){
+		element.description=element.description.substring(0,150)+'...';
+	}	
+	if(typeof element.rating =='undefined' ||element.rating==null ){
+		element.rating=0;
+	}
+	if(typeof element.numComments =='undefined' ||element.numComments==null ){
+		element.numComments=0;
+	}
+	var elemhtml= `	<div class="col-3">
+		       		<div class="card" style="    min-height: 500px;    margin-left: 10px;    margin-top: 10px;    margin-right: 10px;    margin-bottom: 10px;" onclick="func('${element.id}')">
+						<img class="card-img-top" style="max-height:300px" src="${element.images[0]}?disposition=x&x-op-apikey=b2fd5ceda7154eecb401886f461a6f0a">
+						<div class="card-body">
+							<h5 class="card-title" style="      font-size: 1.5rem;">${element.name}</h5>
+							<div class="row">
+								<div class="col-9">
+									<p class="card-text">${element.description}</p>
+								</div>
+								<div class="col-3">
+									<div class="row">
+										<span style="    margin-top: 9px;" class="lnr lnr-thumbs-up"></span>
+										<span style="    margin-left: 10px; font-size: 1.5rem;" class="card-text">${parseFloat(element.rating).toFixed(2)}</span>
+									</div>
+									<div class="row">
+										<span  style="    margin-top: 9px;" class="lnr lnr-bubble"></span>
+										<span style="    margin-left: 10px; font-size: 1.5rem;" class="card-text">${parseFloat(element.numComments).toFixed(0)}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+				   	</div>
+					</div> `;
+					$('#divchildrens').append(elemhtml);
+
+
+
+	});
+	$('#spinnermain').hide();
+	}
+
+	function func(id) {
+			document.location.href = "element.html?id=" + id;
+		}
 
 	</script>
 
