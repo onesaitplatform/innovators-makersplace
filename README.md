@@ -16,7 +16,8 @@ Espacio público en el que compartir diseños 3D que puedan ayudar a la construc
 - Podemos ver en detalle estos diseños, en esta pantalla se pueden valorar y descargar.
 - Tenemos la opción de compartir nuestras propias creaciones, asignandoles un nombre, una descripción corta, un resumen, subir una imagen y un fichero con la información del diseño.
 
-
+Acceso a la web donde esta alojado el market place
+[Makers 3D contra el Covid-19](https://lab.onesaitplatform.com/web/market3d/index.html)
 
 
 Pasos seguidos para el desarrollo del proyecto:
